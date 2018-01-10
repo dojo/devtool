@@ -6,5 +6,6 @@ install:
 - npm install @dojo/cli -g
 - npm install
 script:
-- dojo test
+- dojo build app -m test
+- dojo test intern --cov
 - ./node_modules/.bin/codecov

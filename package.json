@@ -43,7 +43,7 @@
   ],
   "devDependencies": {
     "@dojo/cli-build-app": "file:deps/dojo-cli-build-app-0.1.0-rc.1.tgz",
-    "@dojo/cli-test-intern": "^0.2.1",
+    "@dojo/cli-test-intern": "file:deps/dojo-cli-test-intern-0.3.1-rc.1.tgz",
     "@dojo/core": "~0.2.1",
     "@dojo/diagnostics": "file:deps/dojo-diagnostics-0.1.0-rc.1.tgz",
     "@dojo/has": "~0.1.1",
