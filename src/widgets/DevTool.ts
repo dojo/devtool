@@ -391,7 +391,7 @@ export class DevTool extends ThemedBase<DevToolProperties> {
 				]);
 		}
 
-		const left = v('div', { classes: this.theme(devtoolCss.left) }, [
+		return v('div', { classes: this.theme(devtoolCss.left) }, [
 			v('div', { classes: this.theme(devtoolCss.leftHeader) }, [
 				v('span', { classes: this.theme(devtoolCss.leftTitle), key: 'title' }, [title]),
 				select,
@@ -430,7 +430,6 @@ export class DevTool extends ThemedBase<DevToolProperties> {
 			]),
 			viewDom
 		]);
-		return left;
 	}
 
 	/**

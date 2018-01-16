@@ -7,12 +7,7 @@
 		"jsxFactory": "tsx",
 		"lib": [
 			"dom",
-			"es5",
-			"es2015.iterable",
-			"es2015.promise",
-			"es2015.symbol",
-			"es2015.symbol.wellknown",
-			"es2016.array.include"
+			"es2017"
 		],
 		"module": "umd",
 		"moduleResolution": "node",
