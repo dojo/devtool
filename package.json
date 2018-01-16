@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "dojo build && shx rm output/dist/manifest.json",
-    "build:test": "dojo build -m test && shx rm output/test/manifest.json",
+    "build:test": "dojo build -m test",
     "clean": "npm-run-all clean:*",
     "clean:pack": "shx rm -rf *.tgz *.zip",
     "clean:output": "shx rm -rf output",
@@ -44,8 +44,8 @@
     "README.md"
   ],
   "devDependencies": {
-    "@dojo/cli-build-app": "file:deps/dojo-cli-build-app-0.1.2-rc.1.tgz",
-    "@dojo/cli-test-intern": "file:deps/dojo-cli-test-intern-0.3.1-rc.1.tgz",
+    "@dojo/cli-build-app": "0.1.1",
+    "@dojo/cli-test-intern": "0.4.0",
     "@dojo/core": "~0.2.1",
     "@dojo/diagnostics": "file:deps/dojo-diagnostics-0.1.0-rc.1.tgz",
     "@dojo/has": "~0.1.1",
