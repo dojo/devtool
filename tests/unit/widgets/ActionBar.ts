@@ -78,6 +78,8 @@ describe('ActionBarButton', () => {
 				]
 			)
 		);
+
+		widget.destroy();
 	});
 
 	it('supports adding an array of icon classes', () => {
@@ -106,6 +108,8 @@ describe('ActionBarButton', () => {
 				]
 			)
 		);
+
+		widget.destroy();
 	});
 });
 
