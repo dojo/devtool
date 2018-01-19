@@ -8,14 +8,18 @@ import * as devtoolCss from '../../../src/widgets/styles/devtool.m.css';
 import * as icons from '../../../src/widgets/styles/icons.m.css';
 
 import Button from '@dojo/widgets/button/Button';
+import Select from '@dojo/widgets/select/Select';
 import Tab from '@dojo/widgets/tabcontroller/Tab';
 import TabController from '@dojo/widgets/tabcontroller/TabController';
 import ActionBar, { ActionBarButton } from '../../../src/widgets/ActionBar';
 import EventLog from '../../../src/widgets/EventLog';
 import ItemList from '../../../src/widgets/ItemList';
+import StoreState from '../../../src/widgets/StoreState';
+import VDom from '../../../src/widgets/VDom';
 import devToolTheme from '../../../src/themes/devtool/index';
 import { Diagnostics, InterfaceState } from '../../../src/state/interfaces';
 import { EventLogRecord } from '@dojo/diagnostics/diagnosticEvents';
+import { SerializedHNode } from '@dojo/diagnostics/serializeDNode';
 
 function getMockState(
 	api = false,
@@ -184,6 +188,87 @@ describe('DevTool', () => {
 			v('div', { classes: devtoolCss.root, key: 'root' }, [
 				v('div', { classes: devtoolCss.content, key: 'content' }, [
 					getLeftRender(widget, 'Event Log', null, viewDom, true, true),
+					getRightRender(widget)
+				])
+			])
+		);
+	});
+
+	it('should render virtual DOM view when view is "vdom"', () => {
+		const widget = harness(DevTool);
+		const lastRender: SerializedHNode = {
+			properties: {},
+			tag: 'DIV',
+			type: 'hnode'
+		};
+		const diagnostics = {
+			eventLog: [],
+			projectors: ['projector1'],
+			lastRender,
+			stores: []
+		};
+		widget.setProperties(getMockState(true, 'vdom', diagnostics));
+		const select = v('span', { classes: devtoolCss.leftSelect, key: 'select' }, [
+			w(Select, {
+				getOptionSelected: widget.listener,
+				key: 'select',
+				options: ['projector1'],
+				placeholder: 'Select projector',
+				value: undefined,
+
+				onChange: widget.listener
+			})
+		]);
+		const viewDom = w(VDom, {
+			expanded: [],
+			key: 'vdom',
+			root: lastRender,
+			selected: undefined,
+			onItemSelect: widget.listener,
+			onItemToggle: widget.listener
+		});
+		widget.expectRender(
+			v('div', { classes: devtoolCss.root, key: 'root' }, [
+				v('div', { classes: devtoolCss.content, key: 'content' }, [
+					getLeftRender(widget, 'Last Render', select, viewDom, true, true),
+					getRightRender(widget)
+				])
+			])
+		);
+	});
+
+	it('should render store view when view is "store"', () => {
+		const widget = harness(DevTool);
+		const diagnostics = {
+			eventLog: [],
+			projectors: [],
+			lastRender: null,
+			stores: ['store_1']
+		};
+		widget.setProperties(getMockState(true, 'store', diagnostics));
+		const select = v('span', { classes: devtoolCss.leftSelect, key: 'select' }, [
+			w(Select, {
+				getOptionSelected: widget.listener,
+				key: 'select',
+				options: ['store_1'],
+				placeholder: 'Select store',
+				value: undefined,
+
+				onChange: widget.listener
+			})
+		]);
+		const viewDom = w(StoreState, {
+			expanded: [],
+			key: 'store',
+			selected: undefined,
+			state: undefined,
+			onItemSelect: widget.listener,
+			onItemToggle: widget.listener
+		});
+		widget.expectRender(
+			v('div', { classes: devtoolCss.root, key: 'root' }, [
+				v('div', { classes: devtoolCss.content, key: 'content' }, [
+					getLeftRender(widget, 'Store State', select, viewDom, true, true),
 					getRightRender(widget)
 				])
 			])
