@@ -1,10 +1,11 @@
 sudo: false
 language: node_js
 node_js:
-- '8'
+- '9'
 install:
 - npm install @dojo/cli -g
 - npm install
 script:
-- dojo test
+- dojo build app -m test
+- dojo test intern
 - ./node_modules/.bin/codecov

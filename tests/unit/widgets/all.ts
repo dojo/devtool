@@ -1,1 +1,2 @@
+import './ActionBar';
 import './DevTool';

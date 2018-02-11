@@ -55,6 +55,7 @@ export class ActionBarButton extends ThemedBase<ActionBarButtonProperties, null>
 			[
 				v('a', {
 					classes: [this.theme(actionbarbuttonCss.label), actionbarbuttonCss.labelFixed, ...iconClasses],
+					key: 'link',
 					role: 'button',
 					tabIndex: 0,
 					title
